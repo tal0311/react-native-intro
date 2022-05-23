@@ -8,22 +8,36 @@ import {
   FlatList,
 } from 'react-native'
 
+import { FavPreview } from './FavPreview'
+
 export const UserDetails = ({ user, userDetail }) => {
-  console.log(user)
   const { width, height } = Dimensions.get('window')
   return (
     <View
       style={
         (styles.details,
-        { backgroundColor: user.color, width: width - 100, height: height / 3 })
+        {
+          backgroundColor: user.color,
+          width: width - 100,
+          height: height / 3,
+          borderColor: '#333',
+          borderWidth: 4,
+        })
       }
     >
-      <Text>user details</Text>
-      <Text>{user.username}</Text>
-      <Text onPress={() => userDetail(null)}>bacK</Text>
+      <FlatList
+        data={user.favorites}
+        renderItem={({ item }) => <FavPreview fav={item} />}
+      />
+      <Text style={styles.actions} onPress={() => userDetail(null)}>
+        Back
+      </Text>
     </View>
   )
 }
 const styles = StyleSheet.create({
-  details: {},
+  actions: {
+    textAlign: 'center',
+    margin: 5,
+  },
 })
