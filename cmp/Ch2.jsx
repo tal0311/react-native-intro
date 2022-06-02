@@ -21,12 +21,28 @@ export const Ch2 = ({ userDetail }) => {
   const [addUser, setAddUser] = useState('')
   const [isInput, setIsInput] = useState(false)
 
-  const onChangeText = (ev) => {
-    console.log(ev)
+  const handleChange = (ev) => {
+    setAddUser(ev)
+  }
+  const onAddUser = () => {
+    console.log('add user', addUser)
+    const newUser = {
+      id: Date.now().toString(),
+      username: addUser,
+      favorites: [],
+      color: '#b477f4',
+    }
+    setUsers([...users, newUser])
+  }
+
+  const removeUser = (userId) => {
+    const updated = users.filter((user) => user.id !== userId)
+    setUsers(updated)
   }
   const handlePress = (type, userId) => {
     switch (type) {
       case 'remove':
+        removeUser(userId)
         break
 
       case 'details':
@@ -54,7 +70,11 @@ export const Ch2 = ({ userDetail }) => {
       {isInput && (
         <View style={styles.inputContainer}>
           <Text>add user</Text>
-          <TextInput style={styles.input} />
+          <TextInput
+            style={styles.input}
+            onChangeText={handleChange}
+            onSubmitEditing={onAddUser}
+          />
         </View>
       )}
     </View>

@@ -16,9 +16,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style='auto' />
-      <View>
+      {/* <View>
         <Ch1 />
-      </View>
+      </View> */}
       <View>
         <Ch2 userDetail={userDetail} />
       </View>
@@ -34,7 +34,7 @@ export default function App() {
 const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
-    marginTop: 100,
+    marginTop: 50,
     display: 'flex',
     flex: 1,
     backgroundColor: '#ffff',
